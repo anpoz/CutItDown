@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Cut It Down</string>
+
+    <string name="action_settings">设置</string>
+    <string name="action_about">关于</string>
+    <string name="tab1_fragment_title">最近</string>
+    <string name="tab2_fragment_title">收藏</string>
+    <string name="tab1_fragment_dialog_title">请输入你的Url</string>
+    <string name="tab1_fragment_dialog_ok">确定</string>
+    <string name="tab1_fragment_dialog_cancel">取消</string>
+    <string name="msg_network_error">网络异常</string>
+    <string name="msg_url_cant_null">Url不能为空</string>
+    <string name="msg_network_unavailable">网络不可用</string>
+    <string name="msg_url_already_copy">短链接已复制到剪切板</string>
+    <string name="msg_url_unavailable">链接不可用</string>
+    <string name="msg_url_unsafe_illegal">因为安全原因或网址不合法被拦截</string>
+    <string name="msg_url_other_reason">其它错误原因</string>
+    <string name="msg_url_server_busy">服务器繁忙,请稍后再试</string>
+    <string name="item_btn_copy">复制</string>
+    <string name="item_btn_delete">删除</string>
+    <string name="settings_apilist_summary">当前选择为:</string>
+    <string name="settings_apilist_title">短链接服务API提供者</string>
+    <string name="settings_about_title">关于</string>
+
+    <string name="date_format">MM月dd日</string>
+
+    <string-array name="item_context_menu_tab1">
+        <item>复制</item>
+        <item>收藏</item>
+        <item>删除</item>
+        <item>打开</item>
+    </string-array>
+
+    <string-array name="item_context_menu_tab2">
+        <item>复制</item>
+        <item>取消收藏</item>
+        <item>删除</item>
+        <item>打开</item>
+    </string-array>
+
+</resources>
