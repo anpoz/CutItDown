@@ -51,6 +51,8 @@ public class PreferencesActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+
+
             lp= (ListPreference) findPreference("list_api_preference");
             lp.setDefaultValue("1");
             lp.setSummary(getActivity().getResources().getString(R.string.settings_apilist_summary)+lp.getEntry());

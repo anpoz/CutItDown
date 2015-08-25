@@ -4,11 +4,15 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/app_theme_color</item>
         <item name="colorPrimaryDark">@color/app_theme_color_primary</item>
+        <item name="colorAccent">@color/app_theme_color</item>
     </style>
 
     <style name="SettingsTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/app_theme_color</item>
         <item name="colorPrimaryDark">@color/app_theme_color_primary</item>
+        <item name="colorAccent">@color/app_theme_color</item>
     </style>
+
+
 
 </resources>

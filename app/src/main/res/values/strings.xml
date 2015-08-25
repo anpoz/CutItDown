@@ -23,6 +23,8 @@
     <string name="settings_about_title">关于</string>
 
     <string name="date_format">MM月dd日</string>
+    <string name="setting_category_general">general</string>
+    <string name="setting_category_about">about</string>
 
     <string-array name="item_context_menu_tab1">
         <item>复制</item>
