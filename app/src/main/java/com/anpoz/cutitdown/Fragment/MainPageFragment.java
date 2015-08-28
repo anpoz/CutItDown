@@ -121,7 +121,7 @@ public class MainPageFragment extends Fragment implements MyRecycleViewAdapter.I
 
         mButtonFloat = (FloatingActionButton) getActivity().findViewById(R.id.fab_main_fragment);
 
-        mDialog=new Dialog(getActivity());
+        mDialog = new Dialog(getActivity());
         mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         mDialog.setContentView(R.layout.dialog_new_url);
         mDialog.findViewById(R.id.dialog_input_btn).setOnClickListener(new View.OnClickListener() {
@@ -320,6 +320,15 @@ public class MainPageFragment extends Fragment implements MyRecycleViewAdapter.I
                         Intent intent = new Intent(Intent.ACTION_VIEW,
                                 Uri.parse(mDatas.get(position).getShortUrl()));
                         startActivity(intent);
+                        break;
+                    case 4:
+                        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                        shareIntent.setType("text/plain");
+                        shareIntent.putExtra(Intent.EXTRA_SUBJECT, mDatas.get(position).getShortUrl());
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, mDatas.get(position).getShortUrl());
+                        shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(Intent.createChooser(shareIntent,
+                                getActivity().getResources().getString(R.string.share_link_to)));
                         break;
                 }
             }

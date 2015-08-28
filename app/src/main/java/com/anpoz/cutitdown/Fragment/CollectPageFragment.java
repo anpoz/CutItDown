@@ -170,6 +170,15 @@ public class CollectPageFragment extends Fragment implements MyRecycleViewAdapte
                                 Uri.parse(mDatas.get(position).getShortUrl()));
                         startActivity(intent);
                         break;
+                    case 4:
+                        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                        shareIntent.setType("text/plain");
+                        shareIntent.putExtra(Intent.EXTRA_SUBJECT, mDatas.get(position).getShortUrl());
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, mDatas.get(position).getShortUrl());
+                        shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(Intent.createChooser(shareIntent,
+                                getActivity().getResources().getString(R.string.share_link_to)));
+                        break;
                 }
             }
         });

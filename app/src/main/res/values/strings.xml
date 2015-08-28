@@ -26,11 +26,14 @@
     <string name="setting_category_general">general</string>
     <string name="setting_category_about">about</string>
 
+    <string name="share_link_to">分享短链接到</string>
+
     <string-array name="item_context_menu_tab1">
         <item>复制</item>
         <item>收藏</item>
         <item>删除</item>
         <item>打开</item>
+        <item>分享</item>
     </string-array>
 
     <string-array name="item_context_menu_tab2">
@@ -38,6 +41,7 @@
         <item>取消收藏</item>
         <item>删除</item>
         <item>打开</item>
+        <item>分享</item>
     </string-array>
 
 </resources>
