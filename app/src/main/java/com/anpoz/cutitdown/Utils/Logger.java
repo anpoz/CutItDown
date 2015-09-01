@@ -9,7 +9,7 @@ import android.util.Log;
 
 public class Logger {
     //控制log输出,0为不显示log,6为全部显示
-    public static int LOG_LEVEL = 0;
+    public static int LOG_LEVEL = 6;
     public static int ERROR = 1;
     public static int WARN = 2;
     public static int INFO = 3;

@@ -30,47 +30,51 @@ public class PreferencesActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId()==android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public static class PrefsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener{
+    public static class PrefsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
         private ListPreference lp;
+        private String summary;
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
 
-            Preference version= findPreference("app_version");
+            summary = getActivity().getResources().getString(R.string.settings_apilist_summary);
+
+            Preference version = findPreference("app_version");
             try {
-                version.setSummary("version:"+getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(),0).versionName);
+                version.setSummary("version:" + getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0).versionName);
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
 
 
-
-            lp= (ListPreference) findPreference("list_api_preference");
+            lp = (ListPreference) findPreference("list_api_preference");
             lp.setDefaultValue("1");
-            lp.setSummary(getActivity().getResources().getString(R.string.settings_apilist_summary)+lp.getEntry());
-            SharedPreferences preferences= PreferenceManager.getDefaultSharedPreferences(getActivity());
+            lp.setSummary(summary + lp.getEntry());
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
             preferences.registerOnSharedPreferenceChangeListener(this);
         }
 
 
         /**
          * 动态改变Summary的值
+         *
          * @param sharedPreferences
          * @param key
          */
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (TextUtils.equals("list_api_preference",key)){
+            if (TextUtils.equals("list_api_preference", key)) {
 
-                lp.setSummary(getActivity().getResources().getString(R.string.settings_apilist_summary)+lp.getEntry());
+                lp.setSummary(summary + lp.getEntry());
                 Logger.d("tag", "onSharedPreferenceChanged");
 
             }

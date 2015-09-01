@@ -23,9 +23,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +36,7 @@ import com.anpoz.cutitdown.Beans.Url;
 import com.anpoz.cutitdown.R;
 import com.anpoz.cutitdown.Utils.Logger;
 import com.anpoz.cutitdown.Utils.Provider;
-import com.anpoz.cutitdown.Utils.UrlShortenerManager;
+import com.anpoz.cutitdown.Utils.UrlShortener;
 
 
 import java.util.ArrayList;
@@ -62,7 +60,7 @@ public class MainPageFragment extends Fragment implements MyRecycleViewAdapter.I
 
     private Dialog mDialog;
 
-    private Handler handler = new Handler() {
+    public Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
 //            mTopProgressBar.setVisibility(ProgressBarIndeterminate.GONE);
@@ -70,7 +68,9 @@ public class MainPageFragment extends Fragment implements MyRecycleViewAdapter.I
             if (msg.arg1 == 0) {
                 Url item = (Url) msg.obj;
                 item.setStared(0);
+                item.setDate(System.currentTimeMillis());
                 item.setId(addData(item));
+                item.setStatus(0);
                 mDatas.add(0, item);
                 mAdapter.notifyItemInserted(0);
                 mRecycleView.scrollToPosition(0);
@@ -156,37 +156,14 @@ public class MainPageFragment extends Fragment implements MyRecycleViewAdapter.I
 
     }
 
-    private void addItemThread(final String url, String list_api_preference) {
-        final UrlShortenerManager manager = new UrlShortenerManager(list_api_preference, getActivity());
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Message message = Message.obtain();
-                String raw_url = url;
-                if (!url.contains("http://")) {
-                    raw_url = "http://" + raw_url;
-                }
-                Url item;
-                try {
-                    item = manager.getUrlByLongUrl(raw_url);
-                    /**
-                     * 不在子线程中进行UI操作
-                     */
-                    if (item.getStatus() != 0) {
-                        message.arg1 = 1;
-                        message.obj = item.getErr_message();
-                        Log.d("tag", item.getErr_message());
-                    } else {
-                        message.arg1 = 0;
-                        message.obj = item;
-                    }
-                    handler.sendMessage(message);
-                } catch (Exception e) {
-                    message.arg1 = 1;
-                    message.obj = getResources().getString(R.string.msg_network_error);
-                }
-            }
-        }).start();
+    private void addItemThread(String url, String list_api_preference) {
+        UrlShortener shortener = new UrlShortener(list_api_preference, getActivity(), handler);
+
+        String raw_url = url;
+        if (!url.contains("http://")) {
+            raw_url = "http://" + raw_url;
+        }
+        shortener.makeUrlShortened(raw_url);
     }
 
     /**

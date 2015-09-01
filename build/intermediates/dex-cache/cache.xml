@@ -2,60 +2,67 @@
 <items version="2" >
 
     <item
-        jar="D:\AndroidStudioProjects\CutItDown\app\libs\gson-2.3.1.jar"
+        jar="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\pre-dexed\debug\gson-2.3.1-fae32e0c1609069759238ebc94020af4c2f6c6fe.jar" />
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\pre-dexed\release\internal_impl-22.2.1-7286a2ca85923e12c45a40341564504a948fff83.jar" />
     </item>
     <item
-        jar="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\22.2.1\jars\classes.jar"
+        jar="D:\AndroidStudioProjects\CutItDown\app\libs\volly.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="e1fa5e1123997a55e3ed65b44892993ff4b58cfe">
-        <dex dex="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\pre-dexed\debug\classes-0f0f43a9e89b0428ea817a165957754f4086ce76.jar" />
-    </item>
-    <item
-        jar="H:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
-        <dex dex="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.1-7b220b25c6cf9f030e43747589db4de8469ccddd.jar" />
+        sha1="4e511fd4a63e102128b47852e7128e94ba5e9021">
+        <dex dex="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\pre-dexed\release\volly-da2043eef6fb3f7c859996aa9f64bc21f6587999.jar" />
     </item>
     <item
         jar="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
-        <dex dex="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\pre-dexed\debug\classes-2fd9a01c04ebfb7b9b235643b3e152b7a5a39246.jar" />
+        <dex dex="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\pre-dexed\release\classes-2fd9a01c04ebfb7b9b235643b3e152b7a5a39246.jar" />
+    </item>
+    <item
+        jar="D:\AndroidStudioProjects\CutItDown\app\libs\gson-2.3.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\pre-dexed\release\gson-2.3.1-fae32e0c1609069759238ebc94020af4c2f6c6fe.jar" />
     </item>
     <item
         jar="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="f8efd0096475e0daf054267b61544e10dc776503">
-        <dex dex="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\pre-dexed\debug\classes-b3f0d9cb050bb45a0300f5b298d6631d583cf8fd.jar" />
+        <dex dex="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\pre-dexed\release\classes-b3f0d9cb050bb45a0300f5b298d6631d583cf8fd.jar" />
     </item>
     <item
         jar="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\22.2.1\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="3abb4b88f5a8a0584a9b01d3170d7165f12f8588">
-        <dex dex="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\pre-dexed\debug\classes-4f6d4357c4e56675378e01c052cc5ca61ee6354a.jar" />
+        <dex dex="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\pre-dexed\release\classes-4f6d4357c4e56675378e01c052cc5ca61ee6354a.jar" />
     </item>
     <item
-        jar="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jar="H:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
-        <dex dex="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.1-7286a2ca85923e12c45a40341564504a948fff83.jar" />
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\pre-dexed\release\support-annotations-22.2.1-7b220b25c6cf9f030e43747589db4de8469ccddd.jar" />
     </item>
     <item
         jar="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\exploded-aar\com.android.support\design\22.2.1\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="1821601ddbec5ff125653097812823388700af74">
-        <dex dex="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\pre-dexed\debug\classes-2bfcf59213e8db6330461d781ff74aaa4e70aedf.jar" />
+        <dex dex="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\pre-dexed\release\classes-2bfcf59213e8db6330461d781ff74aaa4e70aedf.jar" />
+    </item>
+    <item
+        jar="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e1fa5e1123997a55e3ed65b44892993ff4b58cfe">
+        <dex dex="D:\AndroidStudioProjects\CutItDown\app\build\intermediates\pre-dexed\release\classes-0f0f43a9e89b0428ea817a165957754f4086ce76.jar" />
     </item>
 
 </items>
