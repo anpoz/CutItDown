@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.anpoz.cutitdown.Adapter.PagerAdapter;
+import com.anpoz.cutitdown.App;
 import com.anpoz.cutitdown.Fragment.CollectPageFragment;
 import com.anpoz.cutitdown.Fragment.MainPageFragment;
 import com.anpoz.cutitdown.R;
@@ -44,6 +45,15 @@ public class MainActivity extends AppCompatActivity implements MainPageFragment.
         initData();
     }
 
+    /**
+     * 使Volley与Activity生命周期联动
+     */
+    @Override
+    public void onStop() {
+        super.onStop();
+        App.getHttpQueues().cancelAll("URL");
+    }
+
     private void initData() {
 
         Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
@@ -52,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements MainPageFragment.
 
         List<Fragment> fragments = new ArrayList<>();
         List<String> titles = new ArrayList<>();
-
         fragments.add(new MainPageFragment());
         fragments.add(new CollectPageFragment());
         titles.add(getResources().getString(R.string.tab1_fragment_title));

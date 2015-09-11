@@ -37,6 +37,7 @@ import com.anpoz.cutitdown.R;
 import com.anpoz.cutitdown.Utils.Logger;
 import com.anpoz.cutitdown.Utils.Provider;
 import com.anpoz.cutitdown.Utils.UrlShortener;
+import com.anpoz.cutitdown.View.ClearableEditText;
 
 
 import java.util.ArrayList;
@@ -112,11 +113,6 @@ public class MainPageFragment extends Fragment implements MyRecycleViewAdapter.I
 
 
     private void initViews() {
-        LayoutInflater inflater = LayoutInflater.from(getActivity());
-
-//        mTopProgressBar = (ProgressBarCircularIndeterminate) rootView.findViewById(R.id.progressBarCircularIndeterminate);
-//        mTopProgressBar.setVisibility(ProgressBarIndeterminate.GONE);
-
         mRecycleView = (RecyclerView) rootView.findViewById(R.id.tab1_recycler_view);
 
         mButtonFloat = (FloatingActionButton) getActivity().findViewById(R.id.fab_main_fragment);
@@ -132,7 +128,7 @@ public class MainPageFragment extends Fragment implements MyRecycleViewAdapter.I
                     return;
                 }
 
-                EditText editText = (EditText) mDialog.findViewById(R.id.dialog_input);
+                ClearableEditText editText= (ClearableEditText) mDialog.findViewById(R.id.dialog_input);
 
                 final String url = editText.getText().toString();
                 if (TextUtils.isEmpty(url)) {
@@ -141,7 +137,6 @@ public class MainPageFragment extends Fragment implements MyRecycleViewAdapter.I
                 }
                 editText.setText("");
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//                mTopProgressBar.setVisibility(ProgressBarIndeterminate.VISIBLE);
                 addItemThread(url, preferences.getString("list_api_preference", "1"));
                 mDialog.dismiss();
             }

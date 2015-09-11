@@ -43,7 +43,7 @@
         android:clickable="true"
         app:backgroundTint="@color/app_theme_color"
         app:rippleColor="#FFFFFF"
-        android:src="@mipmap/ic_add_white"
+        android:src="@drawable/ic_add_white_48dp"
         android:layout_gravity="right|bottom"
         />
 

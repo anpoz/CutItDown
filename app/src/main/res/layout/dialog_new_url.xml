@@ -13,13 +13,15 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:padding="10dp">
-        <EditText
+        <com.anpoz.cutitdown.View.ClearableEditText
             android:layout_weight="1"
             android:id="@+id/dialog_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
             android:focusable="true"
+            android:imeOptions="flagNoExtractUi"
+            android:singleLine="true"
             android:focusableInTouchMode="true"
             android:hint="@string/tab1_fragment_dialog_title"
             />
@@ -29,7 +31,7 @@
             android:id="@+id/dialog_input_btn"
             android:layout_width="48dp"
             android:layout_height="36dp"
-            android:background="@mipmap/ic_insert_link_black_48dp"
+            android:background="@drawable/ic_send_black_48dp"
             />
     </LinearLayout>
 
