@@ -23,22 +23,21 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.anpoz.cutitdown.Adapter.MyRecycleViewAdapter;
 import com.anpoz.cutitdown.Beans.Url;
 import com.anpoz.cutitdown.R;
-import com.anpoz.cutitdown.Utils.Logger;
+import com.anpoz.cutitdown.Utils.LogUtils;
 import com.anpoz.cutitdown.Utils.Provider;
 import com.anpoz.cutitdown.Utils.UrlShortener;
 import com.anpoz.cutitdown.View.ClearableEditText;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,9 +54,7 @@ public class MainPageFragment extends Fragment implements MyRecycleViewAdapter.I
     private MyRecycleViewAdapter mAdapter;
     private Toast mToast = null;
 
-    private FloatingActionButton mButtonFloat;
-
-//    private ProgressBarCircularIndeterminate mTopProgressBar;
+    //    private ProgressBarCircularIndeterminate mTopProgressBar;
 
     private Dialog mDialog;
 
@@ -111,11 +108,35 @@ public class MainPageFragment extends Fragment implements MyRecycleViewAdapter.I
         staredListener = (OnItemStaredListener) activity;
     }
 
+    /**
+     * 初始化ItemTouchHelper
+     *
+     * @param recyclerView
+     */
+    private void initItemTouchHelper(RecyclerView recyclerView) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                //不处理滑动事件
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                deleteData(position);
+                mDatas.remove(position);
+                mAdapter.notifyItemRemoved(position);
+            }
+        }).attachToRecyclerView(recyclerView);
+    }
+
 
     private void initViews() {
         mRecycleView = (RecyclerView) rootView.findViewById(R.id.tab1_recycler_view);
+        initItemTouchHelper(mRecycleView);
 
-        mButtonFloat = (FloatingActionButton) getActivity().findViewById(R.id.fab_main_fragment);
+        FloatingActionButton buttonFloat = (FloatingActionButton) getActivity().findViewById(R.id.fab_main_fragment);
 
         mDialog = new Dialog(getActivity());
         mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -128,7 +149,7 @@ public class MainPageFragment extends Fragment implements MyRecycleViewAdapter.I
                     return;
                 }
 
-                ClearableEditText editText= (ClearableEditText) mDialog.findViewById(R.id.dialog_input);
+                ClearableEditText editText = (ClearableEditText) mDialog.findViewById(R.id.dialog_input);
 
                 final String url = editText.getText().toString();
                 if (TextUtils.isEmpty(url)) {
@@ -142,7 +163,7 @@ public class MainPageFragment extends Fragment implements MyRecycleViewAdapter.I
             }
         });
 
-        mButtonFloat.setOnClickListener(new View.OnClickListener() {
+        buttonFloat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mDialog.show();
@@ -168,11 +189,8 @@ public class MainPageFragment extends Fragment implements MyRecycleViewAdapter.I
      */
     private boolean isOpenNetwork() {
         ConnectivityManager connManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connManager.getActiveNetworkInfo() != null) {
-            return connManager.getActiveNetworkInfo().isAvailable();
-        }
+        return connManager.getActiveNetworkInfo() != null && connManager.getActiveNetworkInfo().isAvailable();
 
-        return false;
     }
 
     private void makeText(String message) {
@@ -204,12 +222,12 @@ public class MainPageFragment extends Fragment implements MyRecycleViewAdapter.I
         cv.put(Provider.UrlColumns.URL_DATE, item.getDate());
         cv.put(Provider.UrlColumns.URL_STARED, item.getStared());
         Uri uri = getActivity().getContentResolver().insert(Provider.UrlColumns.CONTENT_URI, cv);
-        Logger.i("TAG", "insert uri=" + uri);
+        LogUtils.i("insert uri=" + uri);
         String lastPath = uri.getLastPathSegment();
         if (TextUtils.isEmpty(lastPath)) {
-            Logger.i("TAG", "insert failure!");
+            LogUtils.i("insert failure!");
         } else {
-            Logger.i("TAG", "insert success! the id is " + lastPath);
+            LogUtils.i("insert success! the id is " + lastPath);
         }
         return Integer.parseInt(lastPath);
     }
@@ -225,17 +243,15 @@ public class MainPageFragment extends Fragment implements MyRecycleViewAdapter.I
         int url_date = cursor.getColumnIndex(Provider.UrlColumns.URL_DATE);
         int url_stared = cursor.getColumnIndex(Provider.UrlColumns.URL_STARED);
         int id = cursor.getColumnIndex(Provider.UrlColumns._ID);
-        if (cursor != null) {
-            while (cursor.moveToNext()) {
-                Url item = new Url();
-                item.setLongUrl(cursor.getString(url_long));
-                item.setShortUrl(cursor.getString(url_short));
-                item.setDate(cursor.getLong(url_date));
-                item.setStared(cursor.getInt(url_stared));
-                item.setId(cursor.getInt(id));
-                Logger.i("TAG", item.toString());
-                mDatas.add(item);
-            }
+        while (cursor.moveToNext()) {
+            Url item = new Url();
+            item.setLongUrl(cursor.getString(url_long));
+            item.setShortUrl(cursor.getString(url_short));
+            item.setDate(cursor.getLong(url_date));
+            item.setStared(cursor.getInt(url_stared));
+            item.setId(cursor.getInt(id));
+            LogUtils.i(item.toString());
+            mDatas.add(item);
         }
         cursor.close();
         mAdapter.notifyDataSetChanged();
@@ -246,13 +262,13 @@ public class MainPageFragment extends Fragment implements MyRecycleViewAdapter.I
         cv.put(Provider.UrlColumns.URL_STARED, 1);
         int count = getActivity().getContentResolver()
                 .update(Provider.UrlColumns.CONTENT_URI, cv, Provider.UrlColumns._ID + "=?", new String[]{id + ""});
-        Logger.i("TAG", "update changed count=" + count);
+        LogUtils.i("update changed count=" + count);
     }
 
     private void deleteData(int position) {
         int count = getActivity().getContentResolver()
                 .delete(Provider.UrlColumns.CONTENT_URI, Provider.UrlColumns._ID + "=?", new String[]{mDatas.get(position).getId() + ""});
-        Logger.i("TAG", "delete changed count=" + count);
+        LogUtils.i("delete changed count=" + count);
     }
 
 
@@ -260,7 +276,7 @@ public class MainPageFragment extends Fragment implements MyRecycleViewAdapter.I
     public void onItemClick(View v, int position) {
         Url item = mDatas.get(position);
         ClipboardManager clipboardManager = (ClipboardManager) getActivity()
-                .getSystemService(getActivity().CLIPBOARD_SERVICE);
+                .getSystemService(Context.CLIPBOARD_SERVICE);
         clipboardManager.setPrimaryClip(ClipData.newPlainText("Shortened Url", item.getShortUrl()));
 
         makeText(getResources().getString(R.string.msg_url_already_copy));
@@ -274,26 +290,26 @@ public class MainPageFragment extends Fragment implements MyRecycleViewAdapter.I
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
-                    case 0:
+                    case 0://复制
                         onItemClick(v, position);
                         break;
-                    case 1:
+                    case 1://收藏
                         updateStared(mDatas.get(position).getId());
                         mDatas.remove(position);
                         mAdapter.notifyDataSetChanged();
                         staredListener.OnItemStared();
                         break;
-                    case 2:
+                    case 2://删除
                         deleteData(position);
                         mDatas.remove(position);
                         mAdapter.notifyItemRemoved(position);
                         break;
-                    case 3:
+                    case 3://打开
                         Intent intent = new Intent(Intent.ACTION_VIEW,
                                 Uri.parse(mDatas.get(position).getShortUrl()));
                         startActivity(intent);
                         break;
-                    case 4:
+                    case 4://分享
                         Intent shareIntent = new Intent(Intent.ACTION_SEND);
                         shareIntent.setType("text/plain");
                         shareIntent.putExtra(Intent.EXTRA_SUBJECT, mDatas.get(position).getShortUrl());

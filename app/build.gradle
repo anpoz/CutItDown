@@ -29,5 +29,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'com.android.support:support-v4:22.2.1'
     compile 'com.android.support:design:22.2.1'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.squareup.okio:okio:1.6.0'
     compile files('libs/volly.jar')
+    compile files('libs/okhttp-urlconnection-2.5.0.jar')
 }

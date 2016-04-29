@@ -65,7 +65,7 @@ public class UrlShortener {
                 stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
-                        Logger.d("SinaUrlShortener", "jsonString:" + s);
+                        LogUtils.d("jsonString:" + s);
                         Gson gson = new Gson();
                         Result r = gson.fromJson(s.substring(s.indexOf('{')), Result.class);
                         SinaUrl sinaUrl = r.getUrls().get(0);
@@ -93,7 +93,7 @@ public class UrlShortener {
                 stringRequest = new StringRequest(Request.Method.POST, BAIDU_API_URL, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
-                        Logger.d("BaiduUrlShortener", "jsonString:" + s);
+                        LogUtils.d("jsonString:" + s);
                         Gson gson = new Gson();
                         BaiduUrl baiduUrl = gson.fromJson(s.substring(s.indexOf('{')), BaiduUrl.class);
                         Message message = Message.obtain();
@@ -132,7 +132,7 @@ public class UrlShortener {
                 stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
-                        Logger.d("985soUrlShortener", "jsonString:" + s);
+                        LogUtils.d("jsonString:" + s);
                         Gson gson = new Gson();
                         _985soUrl soUrl = gson.fromJson(s.substring(s.indexOf('{')), _985soUrl.class);
                         Message message = Message.obtain();
@@ -167,7 +167,7 @@ public class UrlShortener {
                 stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
-                        Logger.d("isgdUrlShortener", "jsonString:" + s);
+                        LogUtils.d("jsonString:" + s);
                         Gson gson = new Gson();
                         IsgdUrl isgdUrl = gson.fromJson(s.substring(s.indexOf('{')), IsgdUrl.class);
                         Message message = Message.obtain();
@@ -199,7 +199,7 @@ public class UrlShortener {
     }
 
     private void sendErrorMessage(VolleyError volleyError) {
-        Logger.e("Volley Error", volleyError.toString());
+        LogUtils.e(volleyError.toString());
         Message message = Message.obtain();
         message.arg1 = 1;
         message.obj = mContext.getResources().getString(R.string.msg_network_error);

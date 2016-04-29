@@ -1,24 +1,16 @@
 package com.anpoz.cutitdown.Activity;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.anpoz.cutitdown.Adapter.PagerAdapter;
@@ -35,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements MainPageFragment.
 
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
-    private PagerAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +58,9 @@ public class MainActivity extends AppCompatActivity implements MainPageFragment.
         titles.add(getResources().getString(R.string.tab1_fragment_title));
         titles.add(getResources().getString(R.string.tab2_fragment_title));
 
-        mAdapter = new PagerAdapter(getSupportFragmentManager(), fragments, titles);
+        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), fragments, titles);
 
-        mViewPager.setAdapter(mAdapter);
+        mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
 
     }

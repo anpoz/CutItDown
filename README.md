@@ -4,6 +4,11 @@
 这是我做的第一个应用，专注于短链接生成，API可以选择调用[新浪](http://open.weibo.com/wiki/2/short_url/shorten)、[百度](http://dwz.cn/)、[985.so](http://985.so/)还有[is.gd](http://is.gd/),
 后续会根据需求添加更多可选的API。
 
+**v1.1.2**
+ - 使用OkHttp作为底层的HttpClient
+ - 增加滑动删除功能
+ - 更新Log模块
+
 **v1.1.1**
  - 优化内存占用
  - 优化Volley与Activity的生命周期的联动

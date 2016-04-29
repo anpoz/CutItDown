@@ -7,14 +7,12 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.anpoz.cutitdown.R;
-import com.anpoz.cutitdown.Utils.Logger;
+import com.anpoz.cutitdown.Utils.LogUtils;
 
 /**
  * Created by anpoz on 2015/8/18.
@@ -75,7 +73,7 @@ public class PreferencesActivity extends AppCompatActivity {
             if (TextUtils.equals("list_api_preference", key)) {
 
                 lp.setSummary(summary + lp.getEntry());
-                Logger.d("tag", "onSharedPreferenceChanged");
+                LogUtils.d("onSharedPreferenceChanged");
 
             }
 

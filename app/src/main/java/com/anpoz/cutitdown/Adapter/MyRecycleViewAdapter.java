@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.anpoz.cutitdown.Beans.Url;
 import com.anpoz.cutitdown.R;
-import com.anpoz.cutitdown.Utils.Logger;
+import com.anpoz.cutitdown.Utils.LogUtils;
 import com.anpoz.cutitdown.Utils.Provider;
 
 import java.text.SimpleDateFormat;
@@ -45,8 +45,7 @@ public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdap
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_md_cardview, viewGroup, false);
-        ViewHolder vh = new ViewHolder(view, mItemClickListener, mItemLongClickListener);
-        return vh;
+        return new ViewHolder(view, mItemClickListener, mItemLongClickListener);
     }
 
     public void setItemClickListener(ItemClickListener mItemClickListener) {
@@ -76,7 +75,7 @@ public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdap
             public void onClick(View v) {
                 int count = mContext.getContentResolver()
                         .delete(Provider.UrlColumns.CONTENT_URI, Provider.UrlColumns._ID + "=?", new String[]{temp.getId() + ""});
-                Logger.i("TAG", "delete changed count=" + count);
+                LogUtils.i("delete changed count=" + count);
                 notifyItemRemoved(mDatas.indexOf(temp));
                 mDatas.remove(temp);
             }
@@ -123,14 +122,14 @@ public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdap
         @Override
         public void onClick(View v) {
             if (mItemClickListener != null) {
-                mItemClickListener.onItemClick(v, getPosition());
+                mItemClickListener.onItemClick(v, getLayoutPosition());
             }
         }
 
         @Override
         public boolean onLongClick(View v) {
             if (mItemLongClickListener != null) {
-                mItemLongClickListener.onItemLongClick(v, getPosition());
+                mItemLongClickListener.onItemLongClick(v, getLayoutPosition());
             }
             return true;
         }
